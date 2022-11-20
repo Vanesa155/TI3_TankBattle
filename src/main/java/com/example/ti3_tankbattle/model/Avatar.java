@@ -29,8 +29,8 @@ public class Avatar {
         String uri2 = "file:"+ Application.class.getResource("wall.png").getPath();;
         tank = new Image(uri);
         wall = new Image(uri2);
-        pos = new Vector (100,100);
-        pos2 = new Vector(200, 150);
+        pos = new Vector (40,220);
+        pos2 = new Vector(560, 80);
         direction = new Vector(2,2);
         direction2 = new Vector(-2,-2);
      }
@@ -76,6 +76,7 @@ public class Avatar {
     }
 
     public void moveForward(){
+        //System.out.println(pos.x +" "+ pos.y);
         pos.x += direction.x;
         pos.y += direction.y;
     }
@@ -95,6 +96,7 @@ public class Avatar {
     }
 
     public void moveForward2(){
+        //System.out.println(pos2.x +" "+ pos2.y);
         pos2.x += direction2.x;
         pos2.y += direction2.y;
     }
