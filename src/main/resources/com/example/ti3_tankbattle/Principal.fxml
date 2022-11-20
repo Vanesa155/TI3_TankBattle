@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #459819;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #459819;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ti3_tankbattle.PrincipalController">
    <children>
       <ImageView fitHeight="241.0" fitWidth="457.0" layoutX="86.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,9 +35,9 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="312.0" style="-fx-background-color: #286707;" />
-      <TextField layoutX="219.0" layoutY="312.0" style="-fx-background-color: #286707;" />
-      <TextField layoutX="441.0" layoutY="312.0" style="-fx-background-color: #286707;" />
-      <Button layoutX="268.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #58FF00;" text="START" />
+      <TextField fx:id="p1TextField" layoutX="14.0" layoutY="312.0" style="-fx-background-color: #286707;" />
+      <TextField fx:id="p2TextField" layoutX="219.0" layoutY="312.0" style="-fx-background-color: #286707;" />
+      <TextField fx:id="cpuTextField" layoutX="441.0" layoutY="312.0" style="-fx-background-color: #286707;" />
+      <Button layoutX="268.0" layoutY="361.0" mnemonicParsing="false" onAction="#Start" style="-fx-background-color: #58FF00;" text="START" />
    </children>
 </AnchorPane>

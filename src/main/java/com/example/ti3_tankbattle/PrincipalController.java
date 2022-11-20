@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class PrincipalController {
     @FXML
@@ -17,7 +18,9 @@ public class PrincipalController {
 
     @FXML
     void Start(ActionEvent event) {
-
+        Application.showWindow("game.fxml");
+        Stage currentStage = (Stage) p1TextField.getScene().getWindow();
+        currentStage.hide();
     }
 
     @FXML
