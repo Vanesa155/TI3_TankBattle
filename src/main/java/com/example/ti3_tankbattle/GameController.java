@@ -1,6 +1,8 @@
 package com.example.ti3_tankbattle;
 
 import com.example.ti3_tankbattle.model.Avatar;
+import com.example.ti3_tankbattle.model.Bullet;
+import com.example.ti3_tankbattle.model.Vector;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -15,13 +17,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class GameController {
 
     private GraphicsContext gc;
 
     private Avatar avatar;
 
+
     private Avatar Wall;
+
+    private ArrayList<Bullet> bullets;
 
     private Boolean isRuning = true;
 
@@ -534,20 +541,18 @@ public class GameController {
 
 
     public void initialize() {
-        String uriW = "file:" + GameController.class.getResource("wall.png").getPath();
-        Image wall = new Image(uriW);
-
 
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
 
-        canvas.setOnMouseClicked(this::onMouseClicked);
 
         canvas.setOnKeyPressed(this::inKeyPressed);
 
         canvas.setOnKeyReleased(this::onKeyReleased);
+
         avatar = new Avatar(canvas); // se crea el avatar
         Wall = new Avatar(canvas);
+        bullets = new ArrayList<>();
         draw();
 
     }
@@ -609,10 +614,93 @@ public class GameController {
         if (keyEvent.getCode() == KeyCode.RIGHT) {
             Rightpressed = true;
         }
+        if (keyEvent.getCode() == KeyCode.X) {
+            Bullet bullet = new Bullet(canvas, new Vector(avatar.pos.x, avatar.pos.y),  new Vector(5*avatar.direction.x, 5*avatar.direction.y));
+            bullets.add(bullet);
+        }
+        if (keyEvent.getCode() == KeyCode.SPACE) {
+            Bullet bullet = new Bullet(canvas, new Vector(avatar.pos2.x, avatar.pos2.y),  new Vector(5*avatar.direction2.x, 5*avatar.direction2.y));
+            bullets.add(bullet);
+        }
     }
 
     public void onMouseClicked(MouseEvent mouseEvent) {
         avatar.setPosition(mouseEvent.getX(), mouseEvent.getY());
+    }
+
+    public void drawWalls(){
+        Wall.drawWall(Image22.getLayoutX(),Image22.getLayoutY(), Image22.getFitWidth(),Image22.getFitHeight());
+        Wall.drawWall(Image23.getLayoutX(),Image23.getLayoutY(), Image23.getFitWidth(),Image23.getFitHeight());
+        Wall.drawWall(Image26.getLayoutX(),Image26.getLayoutY(), Image26.getFitWidth(),Image26.getFitHeight());
+        Wall.drawWall(Image27.getLayoutX(),Image27.getLayoutY(), Image27.getFitWidth(),Image27.getFitHeight());
+        //Wall.drawWall(Image28.getLayoutX(),Image28.getLayoutY(), Image28.getFitWidth(),Image28.getFitHeight());
+
+        Wall.drawWall(Image52.getLayoutX(),Image52.getLayoutY(), Image52.getFitWidth(),Image52.getFitHeight());
+        Wall.drawWall(Image53.getLayoutX(),Image53.getLayoutY(), Image53.getFitWidth(),Image53.getFitHeight());
+        Wall.drawWall(Image54.getLayoutX(),Image54.getLayoutY(), Image54.getFitWidth(),Image54.getFitHeight());
+        Wall.drawWall(Image55.getLayoutX(),Image55.getLayoutY(), Image55.getFitWidth(),Image55.getFitHeight());
+        Wall.drawWall(Image56.getLayoutX(),Image56.getLayoutY(), Image56.getFitWidth(),Image56.getFitHeight());
+        Wall.drawWall(Image57.getLayoutX(),Image57.getLayoutY(), Image57.getFitWidth(),Image57.getFitHeight());
+
+        Wall.drawWall(Image64.getLayoutX(),Image64.getLayoutY(), Image64.getFitWidth(),Image64.getFitHeight());
+        Wall.drawWall(Image65.getLayoutX(),Image65.getLayoutY(), Image65.getFitWidth(),Image65.getFitHeight());
+
+        Wall.drawWall(Image74.getLayoutX(),Image74.getLayoutY(), Image74.getFitWidth(),Image74.getFitHeight());
+        Wall.drawWall(Image75.getLayoutX(),Image75.getLayoutY(), Image75.getFitWidth(),Image75.getFitHeight());
+
+        Wall.drawWall(Image84.getLayoutX(),Image84.getLayoutY(), Image84.getFitWidth(),Image84.getFitHeight());
+        Wall.drawWall(Image85.getLayoutX(),Image85.getLayoutY(), Image85.getFitWidth(),Image85.getFitHeight());
+
+        Wall.drawWall(Image94.getLayoutX(),Image94.getLayoutY(), Image94.getFitWidth(),Image94.getFitHeight());
+        Wall.drawWall(Image95.getLayoutX(),Image95.getLayoutY(), Image95.getFitWidth(),Image95.getFitHeight());
+
+        Wall.drawWall(Image102.getLayoutX(),Image102.getLayoutY(), Image102.getFitWidth(),Image102.getFitHeight());
+        Wall.drawWall(Image103.getLayoutX(),Image103.getLayoutY(), Image103.getFitWidth(),Image103.getFitHeight());
+        Wall.drawWall(Image104.getLayoutX(),Image104.getLayoutY(), Image104.getFitWidth(),Image104.getFitHeight());
+        Wall.drawWall(Image105.getLayoutX(),Image105.getLayoutY(), Image105.getFitWidth(),Image105.getFitHeight());
+        Wall.drawWall(Image106.getLayoutX(),Image106.getLayoutY(), Image106.getFitWidth(),Image106.getFitHeight());
+        Wall.drawWall(Image107.getLayoutX(),Image107.getLayoutY(), Image107.getFitWidth(),Image107.getFitHeight());
+
+        Wall.drawWall(Image132.getLayoutX(),Image132.getLayoutY(), Image132.getFitWidth(),Image132.getFitHeight());
+        Wall.drawWall(Image133.getLayoutX(),Image133.getLayoutY(), Image133.getFitWidth(),Image133.getFitHeight());
+        Wall.drawWall(Image136.getLayoutX(),Image136.getLayoutY(), Image136.getFitWidth(),Image136.getFitHeight());
+        Wall.drawWall(Image137.getLayoutX(),Image137.getLayoutY(), Image137.getFitWidth(),Image137.getFitHeight());
+    }
+
+    public void doKeyBoardAction(){
+        if (Wpressed) {
+
+            //avatar.moveVertical(-3);
+            avatar.moveForward();
+        }
+        if (Apressed) {
+            //avatar.moveHorizontal(-3);
+            avatar.changeAngle(-10);
+        }
+        if (Spressed) {
+            //avatar.moveVertical(3);
+            avatar.moveReverse();
+        }
+        if (Dpressed) {
+            //avatar.moveHorizontal(3);
+            avatar.changeAngle(10);
+        }
+        if (Uppressed) {
+            //avatar.moveVertical(-3);
+            avatar.moveForward2();
+        }
+        if (Leftpressed) {
+            //avatar.moveHorizontal(-3);
+            avatar.changeAngle2(-10);
+        }
+        if (Downpressed) {
+            //avatar.moveVertical(3);
+            avatar.moveReverse2();
+        }
+        if (Rightpressed) {
+            //avatar.moveHorizontal(3);
+            avatar.changeAngle2(10);
+        }
     }
 
     public void draw() {
@@ -627,86 +715,19 @@ public class GameController {
                                     avatar.draw();
                                     avatar.draw1();
 
-                                    //paredes
-                                    // 2.1 2.2 2.3 2.6 2.7 2.8
-                                    // 4.4 4.5
-                                    // 6.2 6.3 6.4 6.5 6.6 6.7
-                                    // 7.4 7.5
-                                    // 8.4 8.5
-                                    // 9.2 9.3 9.4 9.5 9.6 9.7
-                                    // 11.4 11.5
-                                    // 13.1 13.2 13.3 13.6 13.7 13.8
-                                    //Wall.drawWall(Image21.getLayoutX(),Image21.getLayoutY(), Image21.getFitWidth(),Image21.getFitHeight());
-                                    Wall.drawWall(Image22.getLayoutX(),Image22.getLayoutY(), Image22.getFitWidth(),Image22.getFitHeight());
-                                    Wall.drawWall(Image23.getLayoutX(),Image23.getLayoutY(), Image23.getFitWidth(),Image23.getFitHeight());
-                                    Wall.drawWall(Image26.getLayoutX(),Image26.getLayoutY(), Image26.getFitWidth(),Image26.getFitHeight());
-                                    Wall.drawWall(Image27.getLayoutX(),Image27.getLayoutY(), Image27.getFitWidth(),Image27.getFitHeight());
-                                    //Wall.drawWall(Image28.getLayoutX(),Image28.getLayoutY(), Image28.getFitWidth(),Image28.getFitHeight());
+                                    drawWalls();
 
-                                    Wall.drawWall(Image52.getLayoutX(),Image52.getLayoutY(), Image52.getFitWidth(),Image52.getFitHeight());
-                                    Wall.drawWall(Image53.getLayoutX(),Image53.getLayoutY(), Image53.getFitWidth(),Image53.getFitHeight());
-                                    Wall.drawWall(Image54.getLayoutX(),Image54.getLayoutY(), Image54.getFitWidth(),Image54.getFitHeight());
-                                    Wall.drawWall(Image55.getLayoutX(),Image55.getLayoutY(), Image55.getFitWidth(),Image55.getFitHeight());
-                                    Wall.drawWall(Image56.getLayoutX(),Image56.getLayoutY(), Image56.getFitWidth(),Image56.getFitHeight());
-                                    Wall.drawWall(Image57.getLayoutX(),Image57.getLayoutY(), Image57.getFitWidth(),Image57.getFitHeight());
 
-                                    Wall.drawWall(Image64.getLayoutX(),Image64.getLayoutY(), Image64.getFitWidth(),Image64.getFitHeight());
-                                    Wall.drawWall(Image65.getLayoutX(),Image65.getLayoutY(), Image65.getFitWidth(),Image65.getFitHeight());
+                                    for (int i = 0; i < bullets.size(); i++) {
+                                        bullets.get(i).draw();
+                                        if(bullets.get(i).pos.x > canvas.getWidth()+20 || bullets.get(i).pos.y > canvas.getHeight()+20 || bullets.get(i).pos.y < -20 || bullets.get(i).pos.x < -20){
+                                            bullets.remove(i);
+                                        }
 
-                                    Wall.drawWall(Image74.getLayoutX(),Image74.getLayoutY(), Image74.getFitWidth(),Image74.getFitHeight());
-                                    Wall.drawWall(Image75.getLayoutX(),Image75.getLayoutY(), Image75.getFitWidth(),Image75.getFitHeight());
-
-                                    Wall.drawWall(Image84.getLayoutX(),Image84.getLayoutY(), Image84.getFitWidth(),Image84.getFitHeight());
-                                    Wall.drawWall(Image85.getLayoutX(),Image85.getLayoutY(), Image85.getFitWidth(),Image85.getFitHeight());
-
-                                    Wall.drawWall(Image94.getLayoutX(),Image94.getLayoutY(), Image94.getFitWidth(),Image94.getFitHeight());
-                                    Wall.drawWall(Image95.getLayoutX(),Image95.getLayoutY(), Image95.getFitWidth(),Image95.getFitHeight());
-
-                                    Wall.drawWall(Image102.getLayoutX(),Image102.getLayoutY(), Image102.getFitWidth(),Image102.getFitHeight());
-                                    Wall.drawWall(Image103.getLayoutX(),Image103.getLayoutY(), Image103.getFitWidth(),Image103.getFitHeight());
-                                    Wall.drawWall(Image104.getLayoutX(),Image104.getLayoutY(), Image104.getFitWidth(),Image104.getFitHeight());
-                                    Wall.drawWall(Image105.getLayoutX(),Image105.getLayoutY(), Image105.getFitWidth(),Image105.getFitHeight());
-                                    Wall.drawWall(Image106.getLayoutX(),Image106.getLayoutY(), Image106.getFitWidth(),Image106.getFitHeight());
-                                    Wall.drawWall(Image107.getLayoutX(),Image107.getLayoutY(), Image107.getFitWidth(),Image107.getFitHeight());
-
-                                    Wall.drawWall(Image132.getLayoutX(),Image132.getLayoutY(), Image132.getFitWidth(),Image132.getFitHeight());
-                                    Wall.drawWall(Image133.getLayoutX(),Image133.getLayoutY(), Image133.getFitWidth(),Image133.getFitHeight());
-                                    Wall.drawWall(Image136.getLayoutX(),Image136.getLayoutY(), Image136.getFitWidth(),Image136.getFitHeight());
-                                    Wall.drawWall(Image137.getLayoutX(),Image137.getLayoutY(), Image137.getFitWidth(),Image137.getFitHeight());
-
-                                    if (Wpressed) {
-
-                                        //avatar.moveVertical(-3);
-                                        avatar.moveForward();
                                     }
-                                    if (Apressed) {
-                                        //avatar.moveHorizontal(-3);
-                                        avatar.changeAngle(-10);
-                                    }
-                                    if (Spressed) {
-                                        //avatar.moveVertical(3);
-                                        avatar.moveReverse();
-                                    }
-                                    if (Dpressed) {
-                                        //avatar.moveHorizontal(3);
-                                        avatar.changeAngle(10);
-                                    }
-                                    if (Uppressed) {
-                                        //avatar.moveVertical(-3);
-                                        avatar.moveForward2();
-                                    }
-                                    if (Leftpressed) {
-                                        //avatar.moveHorizontal(-3);
-                                        avatar.changeAngle2(-10);
-                                    }
-                                    if (Downpressed) {
-                                        //avatar.moveVertical(3);
-                                        avatar.moveReverse2();
-                                    }
-                                    if (Rightpressed) {
-                                        //avatar.moveHorizontal(3);
-                                        avatar.changeAngle2(10);
-                                    }
+
+                                    doKeyBoardAction();
+
                                 });
                         //sleep
                         try {

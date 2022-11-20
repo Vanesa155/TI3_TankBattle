@@ -11,16 +11,15 @@ public class Avatar {
 
     private Canvas canvas;
     private GraphicsContext gc;
-
+    public Vector pos;
+    public Vector direction;
 
     private Image tank;
     private Image wall;
-    private Vector pos;//new
-    private Vector direction; //new
 
-    private Vector pos2;
+    public Vector pos2;
 
-    private Vector direction2;
+    public Vector direction2;
 
     public Avatar(Canvas canvas) {
         this.canvas = canvas;
@@ -70,13 +69,13 @@ public class Avatar {
         double angle = direction.getAngle();
         angle += a;
 
-        //x = a coseno de teta y y = a seno de teta
+        //x = a coseno de teta & y = a seno de teta
         direction.x = amp*Math.cos(Math.toRadians(angle));
         direction.y = amp*Math.sin(Math.toRadians(angle));
     }
 
     public void moveForward(){
-        //System.out.println(pos.x +" "+ pos.y);
+
         pos.x += direction.x;
         pos.y += direction.y;
     }
@@ -96,7 +95,7 @@ public class Avatar {
     }
 
     public void moveForward2(){
-        //System.out.println(pos2.x +" "+ pos2.y);
+
         pos2.x += direction2.x;
         pos2.y += direction2.y;
     }
