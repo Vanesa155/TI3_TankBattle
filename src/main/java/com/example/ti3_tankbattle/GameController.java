@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +21,7 @@ public class GameController {
 
     private Avatar avatar;
 
-
+    private Avatar Wall;
 
     private Boolean isRuning = true;
 
@@ -523,13 +524,13 @@ public class GameController {
 
 
     @FXML
-    private TextField P1TF;
+    private Label P1TF;
 
     @FXML
-    private TextField P3TF;
+    private Label P2TF;
 
     @FXML
-    private TextField P2TF;
+    private Label P3TF;
 
 
     public void initialize() {
@@ -546,7 +547,7 @@ public class GameController {
 
         canvas.setOnKeyReleased(this::onKeyReleased);
         avatar = new Avatar(canvas); // se crea el avatar
-
+        Wall = new Avatar(canvas);
         draw();
 
     }
@@ -626,6 +627,9 @@ public class GameController {
                                     gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
                                     avatar.draw();
                                     avatar.draw1();
+
+                                    //paredes
+                                    Wall.drawWall(Image17.getLayoutX(),Image17.getLayoutY(), Image17.getFitWidth(),Image17.getFitHeight());
 
                                     if (Wpressed) {
 

@@ -14,7 +14,7 @@ public class Avatar {
 
 
     private Image tank;
-
+    private Image wall;
     private Vector pos;//new
     private Vector direction; //new
 
@@ -26,7 +26,9 @@ public class Avatar {
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
         String uri = "file:"+ Application.class.getResource("tank.png").getPath();
+        String uri2 = "file:"+ Application.class.getResource("wall.png").getPath();;
         tank = new Image(uri);
+        wall = new Image(uri2);
         pos = new Vector (100,100);
         pos2 = new Vector(200, 150);
         direction = new Vector(2,2);
@@ -40,7 +42,7 @@ public class Avatar {
         gc.translate(pos.x, pos.y);
         //gc.rotate(45);
         gc.rotate(90+direction.getAngle());
-        gc.drawImage(tank,-25,-25,50,50);
+        gc.drawImage(tank,-17.5,-17.5,35,35);
         gc.restore();
     }
 
@@ -50,12 +52,12 @@ public class Avatar {
         gc.translate(pos2.x, pos2.y);
         //gc.rotate(45);
         gc.rotate(90+direction2.getAngle());
-        gc.drawImage(tank,-25,-25,50,50);
+        gc.drawImage(tank,-17.5,-17.5,35,35);
         gc.restore();
     }
     public void drawWall(double x, double y, double w, double h){
-        gc.setFill(Color.RED);
-        gc.fillRect(x,y,w,h);
+        gc.drawImage(wall,x,y,w,h);
+
 
     }
     public void setPosition(double x, double y){
