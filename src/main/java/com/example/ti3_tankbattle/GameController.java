@@ -24,7 +24,7 @@ public class GameController {
     private GraphicsContext gc;
 
     private Avatar avatar;
-
+    private Avatar avatar2;
 
     private Avatar Wall;
 
@@ -550,8 +550,9 @@ public class GameController {
 
         canvas.setOnKeyReleased(this::onKeyReleased);
 
-        avatar = new Avatar(canvas); // se crea el avatar
-        Wall = new Avatar(canvas);
+        avatar = new Avatar(canvas, 25 , 250); // se crea el avatar
+        avatar2 = new Avatar(canvas, 90, 75);
+        Wall = new Avatar(canvas, 40, 220);
         bullets = new ArrayList<>();
         draw();
 
@@ -588,40 +589,32 @@ public class GameController {
     }
 
     private void inKeyPressed(KeyEvent keyEvent) {
-
-        if (keyEvent.getCode() == KeyCode.W) {
-            Wpressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.A) {
-            Apressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.S) {
-            Spressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.D) {
-            Dpressed = true;
-        }
-
-        if (keyEvent.getCode() == KeyCode.UP) {
-            Uppressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.LEFT) {
-            Leftpressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.DOWN) {
-            Downpressed = true;
-        }
-        if (keyEvent.getCode() == KeyCode.RIGHT) {
-            Rightpressed = true;
-        }
+        if (keyEvent.getCode() == KeyCode.R) {avatar2.setAmmunition(10);}
+        if (keyEvent.getCode() == KeyCode.M) {avatar.setAmmunition(10);}
+        if (keyEvent.getCode() == KeyCode.W) {Wpressed = true;}
+        if (keyEvent.getCode() == KeyCode.A) {Apressed = true;}
+        if (keyEvent.getCode() == KeyCode.S) {Spressed = true;}
+        if (keyEvent.getCode() == KeyCode.D) {Dpressed = true;}
+        if (keyEvent.getCode() == KeyCode.UP) {Uppressed = true;}
+        if (keyEvent.getCode() == KeyCode.LEFT) {Leftpressed = true;}
+        if (keyEvent.getCode() == KeyCode.DOWN) {Downpressed = true;}
+        if (keyEvent.getCode() == KeyCode.RIGHT) {Rightpressed = true;}
         if (keyEvent.getCode() == KeyCode.X) {
-            Bullet bullet = new Bullet(canvas, new Vector(avatar.pos.x, avatar.pos.y),  new Vector(5*avatar.direction.x, 5*avatar.direction.y));
-            bullets.add(bullet);
+
+            if (avatar.getAmmunition() < 1) {System.out.println("Reload");}else{
+
+                Bullet bullet = new Bullet(canvas, new Vector(avatar.pos.x, avatar.pos.y),  new Vector(5*avatar.direction.x, 5*avatar.direction.y));
+                bullets.add(bullet);
+                avatar.setAmmunition(avatar.getAmmunition()-1);}
         }
         if (keyEvent.getCode() == KeyCode.SPACE) {
-            Bullet bullet = new Bullet(canvas, new Vector(avatar.pos2.x, avatar.pos2.y),  new Vector(5*avatar.direction2.x, 5*avatar.direction2.y));
-            bullets.add(bullet);
+
+            if (avatar2.getAmmunition() < 1) {System.out.println("Reload");}else{
+                Bullet bullet = new Bullet(canvas, new Vector(avatar2.pos.x, avatar2.pos.y),  new Vector(5*avatar2.direction.x, 5*avatar2.direction.y));
+                bullets.add(bullet);
+                avatar2.setAmmunition(avatar2.getAmmunition()-1);}
         }
+
     }
 
     public void onMouseClicked(MouseEvent mouseEvent) {
@@ -687,19 +680,19 @@ public class GameController {
         }
         if (Uppressed) {
             //avatar.moveVertical(-3);
-            avatar.moveForward2();
+            avatar2.moveForward();
         }
         if (Leftpressed) {
             //avatar.moveHorizontal(-3);
-            avatar.changeAngle2(-10);
+            avatar2.changeAngle(-10);
         }
         if (Downpressed) {
             //avatar.moveVertical(3);
-            avatar.moveReverse2();
+            avatar2.moveReverse();
         }
         if (Rightpressed) {
             //avatar.moveHorizontal(3);
-            avatar.changeAngle2(10);
+            avatar2.changeAngle(10);
         }
     }
 
@@ -713,7 +706,7 @@ public class GameController {
                                     gc.setFill(Color.BLACK);
                                     gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
                                     avatar.draw();
-                                    avatar.draw1();
+                                    avatar2.draw();
 
                                     drawWalls();
 
