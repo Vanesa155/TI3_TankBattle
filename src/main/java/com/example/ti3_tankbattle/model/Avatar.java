@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import java.util.Random;
 
 public class Avatar {
 
@@ -15,27 +16,22 @@ public class Avatar {
     public Vector direction;
 
     private Image tank;
-    private Image tank1;
     private Image wall;
+    private Random rnd;
 
-    public Vector pos2;
+    private int ammunition = 10;
 
-    public Vector direction2;
-
-    public Avatar(Canvas canvas) {
+    public Avatar(Canvas canvas, double posx, double posy) {
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
         String uri = "file:"+ Application.class.getResource("tank.png").getPath();
         String uri2 = "file:"+ Application.class.getResource("tank1.png").getPath();
         String uriWall = "file:"+ Application.class.getResource("wall.png").getPath();;
         tank = new Image(uri);
-        tank1 = new Image(uri2);
         wall = new Image(uriWall);
-        pos = new Vector (40,220);
-        pos2 = new Vector(560, 80);
+        pos = new Vector (posx,posy);
         direction = new Vector(2,2);
-        direction2 = new Vector(-2,-2);
-     }
+    }
 
     public void draw(){
 
@@ -48,15 +44,6 @@ public class Avatar {
         gc.restore();
     }
 
-    public void draw1(){
-        gc.save();
-        //gc.translate(x,y);
-        gc.translate(pos2.x, pos2.y);
-        //gc.rotate(45);
-        gc.rotate(90+direction2.getAngle());
-        gc.drawImage(tank1,-17.5,-17.5,35,35);
-        gc.restore();
-    }
     public void drawWall(double x, double y, double w, double h){
         gc.drawImage(wall,x,y,w,h);
 
@@ -87,24 +74,13 @@ public class Avatar {
         pos.x -= direction.x;
         pos.y -= direction.y;
     }
-    public void changeAngle2(double a){
-        double amp = direction2.getAmplitude();
-        double angle = direction2.getAngle();
-        angle += a;
 
-        //x = a coseno de teta & y = a seno de teta
-        direction2.x = amp*Math.cos(Math.toRadians(angle));
-        direction2.y = amp*Math.sin(Math.toRadians(angle));
+    public int getAmmunition() {
+        return ammunition;
     }
 
-    public void moveForward2(){
-
-        pos2.x += direction2.x;
-        pos2.y += direction2.y;
-    }
-    public void moveReverse2(){
-        pos2.x -= direction2.x;
-        pos2.y -= direction2.y;
+    public void setAmmunition(int ammunition) {
+        this.ammunition = ammunition;
     }
 
 }
