@@ -10,8 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,6 +27,7 @@ public class GameController implements Initializable {
     private GraphicsContext gc;
     private Avatar avatar;
     private Avatar avatar2;
+    private Avatar cpu;
     private Wall wall;
     private ArrayList<Bullet> bullets;
     private ArrayList<Avatar> players;
@@ -533,13 +532,18 @@ public class GameController implements Initializable {
 
 
     @FXML
-    private Label P1TF;
+    private Label P1_Label;
 
     @FXML
-    private Label P2TF;
+    private Label P2_Label;
 
     @FXML
-    private Label P3TF;
+    private Label cpu_Label;
+
+    //Para lo de cambiar los nombres de los labels
+    //public static Label static_P1_Label;
+    //public static Label static_P2_Label;
+    //public static Label static_CPU_Label;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -551,13 +555,21 @@ public class GameController implements Initializable {
         canvas.setOnKeyReleased(this::onKeyReleased);
 
         avatar = new Avatar(canvas, 25 , 250, "tank.png", "avatar1"); // se crea el avatar
-        avatar2 = new Avatar(canvas, 90, 75, "tank2.png", "avatar2");
+        avatar2 = new Avatar(canvas, 150, 175, "tank1.png", "avatar2");
+        cpu = new Avatar(canvas, 25, 25, "tank2.png", "cpu");
         players.add(avatar);
         players.add(avatar2);
+        players.add(cpu);
 
         wall = new Wall(canvas, 40, 220, "wall.png");
         bullets = new ArrayList<>();
         draw();
+
+        //Para lo de cambiar los nombres de los labels
+        //static_P1_Label = P1_Label;
+        //static_P2_Label = P2_Label;
+        //static_CPU_Label = cpu_Label;
+
     }
 
 
