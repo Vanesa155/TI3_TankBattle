@@ -64,8 +64,8 @@ public class Avatar {
 
     public void moveForward(){
 
-        pos.x += direction.x;
-        pos.y += direction.y;
+        pos.x += direction.x *2;
+        pos.y += direction.y *2;
     }
 
     public void moveReverse(){
