@@ -669,7 +669,7 @@ public class GameController {
         }
         if (Apressed) {
             //avatar.moveHorizontal(-3);
-            avatar.changeAngle(-10);
+            avatar.changeAngle(-15);
         }
         if (Spressed) {
             //avatar.moveVertical(3);
@@ -677,7 +677,7 @@ public class GameController {
         }
         if (Dpressed) {
             //avatar.moveHorizontal(3);
-            avatar.changeAngle(10);
+            avatar.changeAngle(15);
         }
         if (Uppressed) {
             //avatar.moveVertical(-3);
@@ -685,7 +685,7 @@ public class GameController {
         }
         if (Leftpressed) {
             //avatar.moveHorizontal(-3);
-            avatar2.changeAngle(-10);
+            avatar2.changeAngle(-15);
         }
         if (Downpressed) {
             //avatar.moveVertical(3);
@@ -693,7 +693,7 @@ public class GameController {
         }
         if (Rightpressed) {
             //avatar.moveHorizontal(3);
-            avatar2.changeAngle(10);
+            avatar2.changeAngle(15);
         }
     }
 
@@ -709,7 +709,7 @@ public class GameController {
                 double c2 = b.pos.y-a.y;
 
                 double distance = Math.sqrt(Math.pow(c1, 2)+Math.pow(c2,2));
-                System.out.println("distancia de " + players.get(i).name + " a la bala es: " + distance);
+                //System.out.println("distancia de " + players.get(i).name + " a la bala es: " + distance);
                 if (distance < 25) {
 
                     bullets.remove(j);
@@ -752,7 +752,7 @@ public class GameController {
 
                                     }
 
-                                    System.out.println(bullets.size());
+                                    //System.out.println(bullets.size());
 
                                     doKeyBoardAction();
 
@@ -763,7 +763,7 @@ public class GameController {
 
                         //sleep
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(100);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
