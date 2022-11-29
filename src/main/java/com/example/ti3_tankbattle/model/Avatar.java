@@ -21,8 +21,9 @@ public class Avatar {
     private int lifePoints = 5;
 
     private int ammunition = 1000000000;
+    public String name;
 
-    public Avatar(Canvas canvas, double posx, double posy, String imagePath) {
+    public Avatar(Canvas canvas, double posx, double posy, String imagePath, String name) {
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
         String uri = "file:"+ Application.class.getResource(imagePath).getPath();
@@ -31,6 +32,7 @@ public class Avatar {
         direction = new Vector(2,2);
         this.x = posx;
         this.y = posy;
+        this.name = name;
     }
 
     public void draw(){

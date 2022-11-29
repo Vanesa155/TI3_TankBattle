@@ -548,8 +548,8 @@ public class GameController {
         canvas.setOnKeyPressed(this::inKeyPressed);
         canvas.setOnKeyReleased(this::onKeyReleased);
 
-        avatar = new Avatar(canvas, 25 , 250, "tank.png"); // se crea el avatar
-        avatar2 = new Avatar(canvas, 90, 75, "tank2.png");
+        avatar = new Avatar(canvas, 25 , 250, "tank.png", "avatar1"); // se crea el avatar
+        avatar2 = new Avatar(canvas, 90, 75, "tank2.png", "avatar2");
         players.add(avatar);
         players.add(avatar2);
 
@@ -709,7 +709,7 @@ public class GameController {
                 double c2 = b.pos.y-a.y;
 
                 double distance = Math.sqrt(Math.pow(c1, 2)+Math.pow(c2,2));
-                System.out.println(distance);
+                System.out.println("distancia de " + players.get(i).name + " a la bala es: " + distance);
                 if (distance < 25) {
 
                     bullets.remove(j);
@@ -738,8 +738,8 @@ public class GameController {
                                 () -> {
                                     gc.setFill(Color.BLACK);
                                     gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                                    avatar.draw();
-                                    avatar2.draw();
+
+                                    for (int i = 0; i < players.size(); i++) {players.get(i).draw();}
 
                                     drawWalls();
 
