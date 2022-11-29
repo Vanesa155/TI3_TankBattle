@@ -2,11 +2,15 @@ package com.example.ti3_tankbattle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class PrincipalController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PrincipalController extends GameController implements Initializable {
     @FXML
     private TextField p2TextField;
 
@@ -23,8 +27,8 @@ public class PrincipalController {
         currentStage.hide();
     }
 
-    @FXML
-    void Close(ActionEvent event) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 }

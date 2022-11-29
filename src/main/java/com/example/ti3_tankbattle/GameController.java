@@ -6,6 +6,7 @@ import com.example.ti3_tankbattle.model.Vector;
 import com.example.ti3_tankbattle.model.Wall;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -18,9 +19,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class GameController {
+public class GameController implements Initializable {
 
     //Variables globales
     private GraphicsContext gc;
@@ -538,9 +541,8 @@ public class GameController {
     @FXML
     private Label P3TF;
 
-
-    public void initialize() {
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
         players = new ArrayList<>();
@@ -556,7 +558,6 @@ public class GameController {
         wall = new Wall(canvas, 40, 220, "wall.png");
         bullets = new ArrayList<>();
         draw();
-
     }
 
 
@@ -771,4 +772,6 @@ public class GameController {
                 }
         ).start(); //Se debe poner el start para que lo que esté en draw funcione
     }
+
+
 }
