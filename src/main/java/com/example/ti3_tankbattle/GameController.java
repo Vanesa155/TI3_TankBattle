@@ -3,6 +3,7 @@ package com.example.ti3_tankbattle;
 import com.example.ti3_tankbattle.model.Avatar;
 import com.example.ti3_tankbattle.model.Bullet;
 import com.example.ti3_tankbattle.model.Vector;
+import com.example.ti3_tankbattle.model.Wall;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -21,15 +22,13 @@ import java.util.ArrayList;
 
 public class GameController {
 
+    //Variables globales
     private GraphicsContext gc;
-
     private Avatar avatar;
     private Avatar avatar2;
-
-    private Avatar Wall;
-
+    private Wall wall;
     private ArrayList<Bullet> bullets;
-
+    private ArrayList<Avatar> players;
     private Boolean isRuning = true;
 
     //Estados de las teclas
@@ -544,15 +543,17 @@ public class GameController {
 
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
-
+        players = new ArrayList<>();
 
         canvas.setOnKeyPressed(this::inKeyPressed);
-
         canvas.setOnKeyReleased(this::onKeyReleased);
 
-        avatar = new Avatar(canvas, 25 , 250); // se crea el avatar
-        avatar2 = new Avatar(canvas, 90, 75);
-        Wall = new Avatar(canvas, 40, 220);
+        avatar = new Avatar(canvas, 25 , 250, "tank.png"); // se crea el avatar
+        avatar2 = new Avatar(canvas, 90, 75, "tank2.png");
+        players.add(avatar);
+        players.add(avatar2);
+
+        wall = new Wall(canvas, 40, 220, "wall.png");
         bullets = new ArrayList<>();
         draw();
 
@@ -622,42 +623,42 @@ public class GameController {
     }
 
     public void drawWalls(){
-        Wall.drawWall(Image22.getLayoutX(),Image22.getLayoutY(), Image22.getFitWidth(),Image22.getFitHeight());
-        Wall.drawWall(Image23.getLayoutX(),Image23.getLayoutY(), Image23.getFitWidth(),Image23.getFitHeight());
-        Wall.drawWall(Image26.getLayoutX(),Image26.getLayoutY(), Image26.getFitWidth(),Image26.getFitHeight());
-        Wall.drawWall(Image27.getLayoutX(),Image27.getLayoutY(), Image27.getFitWidth(),Image27.getFitHeight());
-        //Wall.drawWall(Image28.getLayoutX(),Image28.getLayoutY(), Image28.getFitWidth(),Image28.getFitHeight());
+        wall.drawWall(Image22.getLayoutX(),Image22.getLayoutY(), Image22.getFitWidth(),Image22.getFitHeight());
+        wall.drawWall(Image23.getLayoutX(),Image23.getLayoutY(), Image23.getFitWidth(),Image23.getFitHeight());
+        wall.drawWall(Image26.getLayoutX(),Image26.getLayoutY(), Image26.getFitWidth(),Image26.getFitHeight());
+        wall.drawWall(Image27.getLayoutX(),Image27.getLayoutY(), Image27.getFitWidth(),Image27.getFitHeight());
+        //wall.drawWall(Image28.getLayoutX(),Image28.getLayoutY(), Image28.getFitWidth(),Image28.getFitHeight());
 
-        Wall.drawWall(Image52.getLayoutX(),Image52.getLayoutY(), Image52.getFitWidth(),Image52.getFitHeight());
-        Wall.drawWall(Image53.getLayoutX(),Image53.getLayoutY(), Image53.getFitWidth(),Image53.getFitHeight());
-        Wall.drawWall(Image54.getLayoutX(),Image54.getLayoutY(), Image54.getFitWidth(),Image54.getFitHeight());
-        Wall.drawWall(Image55.getLayoutX(),Image55.getLayoutY(), Image55.getFitWidth(),Image55.getFitHeight());
-        Wall.drawWall(Image56.getLayoutX(),Image56.getLayoutY(), Image56.getFitWidth(),Image56.getFitHeight());
-        Wall.drawWall(Image57.getLayoutX(),Image57.getLayoutY(), Image57.getFitWidth(),Image57.getFitHeight());
+        wall.drawWall(Image52.getLayoutX(),Image52.getLayoutY(), Image52.getFitWidth(),Image52.getFitHeight());
+        wall.drawWall(Image53.getLayoutX(),Image53.getLayoutY(), Image53.getFitWidth(),Image53.getFitHeight());
+        wall.drawWall(Image54.getLayoutX(),Image54.getLayoutY(), Image54.getFitWidth(),Image54.getFitHeight());
+        wall.drawWall(Image55.getLayoutX(),Image55.getLayoutY(), Image55.getFitWidth(),Image55.getFitHeight());
+        wall.drawWall(Image56.getLayoutX(),Image56.getLayoutY(), Image56.getFitWidth(),Image56.getFitHeight());
+        wall.drawWall(Image57.getLayoutX(),Image57.getLayoutY(), Image57.getFitWidth(),Image57.getFitHeight());
 
-        Wall.drawWall(Image64.getLayoutX(),Image64.getLayoutY(), Image64.getFitWidth(),Image64.getFitHeight());
-        Wall.drawWall(Image65.getLayoutX(),Image65.getLayoutY(), Image65.getFitWidth(),Image65.getFitHeight());
+        wall.drawWall(Image64.getLayoutX(),Image64.getLayoutY(), Image64.getFitWidth(),Image64.getFitHeight());
+        wall.drawWall(Image65.getLayoutX(),Image65.getLayoutY(), Image65.getFitWidth(),Image65.getFitHeight());
 
-        Wall.drawWall(Image74.getLayoutX(),Image74.getLayoutY(), Image74.getFitWidth(),Image74.getFitHeight());
-        Wall.drawWall(Image75.getLayoutX(),Image75.getLayoutY(), Image75.getFitWidth(),Image75.getFitHeight());
+        wall.drawWall(Image74.getLayoutX(),Image74.getLayoutY(), Image74.getFitWidth(),Image74.getFitHeight());
+        wall.drawWall(Image75.getLayoutX(),Image75.getLayoutY(), Image75.getFitWidth(),Image75.getFitHeight());
 
-        Wall.drawWall(Image84.getLayoutX(),Image84.getLayoutY(), Image84.getFitWidth(),Image84.getFitHeight());
-        Wall.drawWall(Image85.getLayoutX(),Image85.getLayoutY(), Image85.getFitWidth(),Image85.getFitHeight());
+        wall.drawWall(Image84.getLayoutX(),Image84.getLayoutY(), Image84.getFitWidth(),Image84.getFitHeight());
+        wall.drawWall(Image85.getLayoutX(),Image85.getLayoutY(), Image85.getFitWidth(),Image85.getFitHeight());
 
-        Wall.drawWall(Image94.getLayoutX(),Image94.getLayoutY(), Image94.getFitWidth(),Image94.getFitHeight());
-        Wall.drawWall(Image95.getLayoutX(),Image95.getLayoutY(), Image95.getFitWidth(),Image95.getFitHeight());
+        wall.drawWall(Image94.getLayoutX(),Image94.getLayoutY(), Image94.getFitWidth(),Image94.getFitHeight());
+        wall.drawWall(Image95.getLayoutX(),Image95.getLayoutY(), Image95.getFitWidth(),Image95.getFitHeight());
 
-        Wall.drawWall(Image102.getLayoutX(),Image102.getLayoutY(), Image102.getFitWidth(),Image102.getFitHeight());
-        Wall.drawWall(Image103.getLayoutX(),Image103.getLayoutY(), Image103.getFitWidth(),Image103.getFitHeight());
-        Wall.drawWall(Image104.getLayoutX(),Image104.getLayoutY(), Image104.getFitWidth(),Image104.getFitHeight());
-        Wall.drawWall(Image105.getLayoutX(),Image105.getLayoutY(), Image105.getFitWidth(),Image105.getFitHeight());
-        Wall.drawWall(Image106.getLayoutX(),Image106.getLayoutY(), Image106.getFitWidth(),Image106.getFitHeight());
-        Wall.drawWall(Image107.getLayoutX(),Image107.getLayoutY(), Image107.getFitWidth(),Image107.getFitHeight());
+        wall.drawWall(Image102.getLayoutX(),Image102.getLayoutY(), Image102.getFitWidth(),Image102.getFitHeight());
+        wall.drawWall(Image103.getLayoutX(),Image103.getLayoutY(), Image103.getFitWidth(),Image103.getFitHeight());
+        wall.drawWall(Image104.getLayoutX(),Image104.getLayoutY(), Image104.getFitWidth(),Image104.getFitHeight());
+        wall.drawWall(Image105.getLayoutX(),Image105.getLayoutY(), Image105.getFitWidth(),Image105.getFitHeight());
+        wall.drawWall(Image106.getLayoutX(),Image106.getLayoutY(), Image106.getFitWidth(),Image106.getFitHeight());
+        wall.drawWall(Image107.getLayoutX(),Image107.getLayoutY(), Image107.getFitWidth(),Image107.getFitHeight());
 
-        Wall.drawWall(Image132.getLayoutX(),Image132.getLayoutY(), Image132.getFitWidth(),Image132.getFitHeight());
-        Wall.drawWall(Image133.getLayoutX(),Image133.getLayoutY(), Image133.getFitWidth(),Image133.getFitHeight());
-        Wall.drawWall(Image136.getLayoutX(),Image136.getLayoutY(), Image136.getFitWidth(),Image136.getFitHeight());
-        Wall.drawWall(Image137.getLayoutX(),Image137.getLayoutY(), Image137.getFitWidth(),Image137.getFitHeight());
+        wall.drawWall(Image132.getLayoutX(),Image132.getLayoutY(), Image132.getFitWidth(),Image132.getFitHeight());
+        wall.drawWall(Image133.getLayoutX(),Image133.getLayoutY(), Image133.getFitWidth(),Image133.getFitHeight());
+        wall.drawWall(Image136.getLayoutX(),Image136.getLayoutY(), Image136.getFitWidth(),Image136.getFitHeight());
+        wall.drawWall(Image137.getLayoutX(),Image137.getLayoutY(), Image137.getFitWidth(),Image137.getFitHeight());
     }
 
     public void doKeyBoardAction(){
@@ -696,6 +697,38 @@ public class GameController {
         }
     }
 
+    private void detectShoot () {
+
+        for (int i = 0; i < players.size(); i++) {
+            for (int j = 0; j < bullets.size(); j ++) {
+
+                Bullet b = bullets.get(j);
+                Avatar a = players.get(i);
+
+                double c1 = b.pos.x-a.x;
+                double c2 = b.pos.y-a.y;
+
+                double distance = Math.sqrt(Math.pow(c1, 2)+Math.pow(c2,2));
+                System.out.println(distance);
+                if (distance < 25) {
+
+                    bullets.remove(j);
+                    players.get(i).setLifePoints(players.get(i).getLifePoints()-1);
+                    if (players.get(i).getLifePoints() < 1) {
+                        players.remove(i);
+                        System.out.println("JUGADOR BORRADO");
+                        System.out.println("tamano arreglos jugadores: " + players.size());
+                    }
+                    return;
+
+                }
+
+            }
+
+        }
+
+    }
+
     public void draw() {
         new Thread(
                 () -> {
@@ -719,9 +752,15 @@ public class GameController {
 
                                     }
 
+                                    System.out.println(bullets.size());
+
                                     doKeyBoardAction();
 
                                 });
+
+                        // Collision
+                        detectShoot();
+
                         //sleep
                         try {
                             Thread.sleep(50);

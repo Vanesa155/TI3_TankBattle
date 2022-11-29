@@ -16,21 +16,21 @@ public class Avatar {
     public Vector direction;
 
     private Image tank;
-    private Image wall;
-    private Random rnd;
+    public double x,y;
 
-    private int ammunition = 10;
+    private int lifePoints = 5;
 
-    public Avatar(Canvas canvas, double posx, double posy) {
+    private int ammunition = 1000000000;
+
+    public Avatar(Canvas canvas, double posx, double posy, String imagePath) {
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
-        String uri = "file:"+ Application.class.getResource("tank.png").getPath();
-        String uri2 = "file:"+ Application.class.getResource("tank1.png").getPath();
-        String uriWall = "file:"+ Application.class.getResource("wall.png").getPath();;
+        String uri = "file:"+ Application.class.getResource(imagePath).getPath();
         tank = new Image(uri);
-        wall = new Image(uriWall);
         pos = new Vector (posx,posy);
         direction = new Vector(2,2);
+        this.x = posx;
+        this.y = posy;
     }
 
     public void draw(){
@@ -44,11 +44,7 @@ public class Avatar {
         gc.restore();
     }
 
-    public void drawWall(double x, double y, double w, double h){
-        gc.drawImage(wall,x,y,w,h);
 
-
-    }
     public void setPosition(double x, double y){
         pos.x=(int) x -25;
         pos.y=(int) y -25;
@@ -81,6 +77,13 @@ public class Avatar {
 
     public void setAmmunition(int ammunition) {
         this.ammunition = ammunition;
+    }
+    public int getLifePoints() {
+        return lifePoints;
+    }
+
+    public void setLifePoints(int lifePoints) {
+        this.lifePoints = lifePoints;
     }
 
 }
