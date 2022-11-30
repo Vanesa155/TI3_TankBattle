@@ -128,8 +128,21 @@ public class GameController implements Initializable {
         players.add(cpu);
         Wall wall1 = new Wall(canvas, 210,150,"wall.png");
         Wall wall2 = new Wall(canvas, 250,150,"wall.png");
+        Wall wall3 = new Wall(canvas, 330,150,"wall.png");
+        Wall wall4 = new Wall(canvas, 330,190,"wall.png");
+        Wall wall5 = new Wall(canvas, 330,230,"wall.png");
+        Wall wall6 = new Wall(canvas, 210,110,"wall.png");
+        Wall wall7 = new Wall(canvas, 210,70,"wall.png");
+        Wall wall8 = new Wall(canvas, 290,150,"wall.png");
         walls.add(wall2);
         walls.add(wall1);
+        walls.add(wall3);
+        walls.add(wall4);
+        walls.add(wall5);
+        walls.add(wall6);
+        walls.add(wall7);
+        walls.add(wall8);
+
 
         draw();
 
@@ -235,6 +248,12 @@ public class GameController implements Initializable {
     public void drawWalls(){
         walls.get(0).drawWall(250,150, 40,40);
         walls.get(1).drawWall(210,150,40,40);
+        walls.get(2).drawWall(330,150,40,40);
+        walls.get(3).drawWall(330,190,40,40);
+        walls.get(4).drawWall(330,230,40,40);
+        walls.get(5).drawWall(210,110, 40,40);
+        walls.get(6).drawWall(210,70, 40,40);
+        walls.get(7).drawWall(290,150, 40,40);
     }
 
     public void doKeyBoardAction(){
@@ -471,7 +490,7 @@ public class GameController implements Initializable {
         ).start(); //Se debe poner el start para que lo que esté en draw funcione
     }
 
-    /*
+
     void comprobarWinner() {
         Stage currentStage = null;
         if (players.size() == 1) {
@@ -493,8 +512,6 @@ public class GameController implements Initializable {
         }
 
     }
-
-     */
 
 }
 
