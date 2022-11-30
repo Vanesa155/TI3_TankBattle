@@ -1,9 +1,6 @@
 package com.example.ti3_tankbattle;
 
-import com.example.ti3_tankbattle.model.Avatar;
-import com.example.ti3_tankbattle.model.Bullet;
-import com.example.ti3_tankbattle.model.Vector;
-import com.example.ti3_tankbattle.model.Wall;
+import com.example.ti3_tankbattle.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,11 +53,6 @@ public class GameController implements Initializable {
     @FXML
     private Label cpu_Label;
 
-    //Para lo de cambiar los nombres de los labels
-    //public static Label static_P1_Label;
-    //public static Label static_P2_Label;
-    //public static Label static_CPU_Label;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gc = canvas.getGraphicsContext2D();
@@ -68,6 +60,12 @@ public class GameController implements Initializable {
         canvas.setOnKeyPressed(this::inKeyPressed);
         canvas.setOnKeyReleased(this::onKeyReleased);
         canvas.setOnMouseClicked(this::onMouseClicked);
+
+        System.out.println(PlayerNames.getInstance().getNameP2());
+        System.out.println(PlayerNames.getInstance().getNameP1());
+
+        P2_Label.setText(PlayerNames.getInstance().getNameP2());
+        P1_Label.setText(PlayerNames.getInstance().getNameP1());
 
         avatar = new Avatar(canvas, 25 , 250, "tank.png", "avatar1"); // se crea el avatar
         avatar2 = new Avatar(canvas, 150, 175, "tank1.png", "avatar2");
