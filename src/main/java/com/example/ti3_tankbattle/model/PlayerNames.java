@@ -17,6 +17,24 @@ public class PlayerNames {
 
     private String nameP1 = "";
     private String nameP2 = "";
+    private int winnner1 = 0;
+    private int winner2 = 0;
+
+    public int getWinner2() {
+        return winner2;
+    }
+
+    public void setWinner2(int winner2) {
+        this.winner2 = winner2;
+    }
+
+    public int getWinnner1() {
+        return winnner1;
+    }
+
+    public void setWinnner1(int winnner1) {
+        this.winnner1 = winnner1;
+    }
 
     public static void setInstance(PlayerNames instance) {
         PlayerNames.instance = instance;
