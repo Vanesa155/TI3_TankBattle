@@ -2,6 +2,8 @@ package com.example.ti3_tankbattle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.ti3_tankbattle.model.PlayerNames;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,29 +33,22 @@ public class PrincipalController extends GameController implements Initializable
 
     @FXML
     void Start(ActionEvent event) {
-        Application.showWindow("game.fxml");
+
         Stage currentStage = (Stage) p1TextField.getScene().getWindow();
         currentStage.hide();
 
         //Para lo de cambiar los nombres de los labels
 
-        //static_P1_Label.setText(p1TextField.getText());
-        //static_P2_Label.setText(p2TextField.getText());
-        //static_CPU_Label.setText(cpuTextField.getText());
+        PlayerNames.getInstance().setNameP1(p1TextField.getText());
+        PlayerNames.getInstance().setNameP2(p2TextField.getText());
 
+        System.out.println(p1TextField.getText());
+        System.out.println(p2TextField.getText());
+        Application.showWindow("game.fxml");
 
     }
 
     @FXML
-    void initialize() {
-        assert cpuTextField != null : "fx:id=\"cpuTextField\" was not injected: check your FXML file 'Principal.fxml'.";
-        assert p1TextField != null : "fx:id=\"p1TextField\" was not injected: check your FXML file 'Principal.fxml'.";
-        assert p2TextField != null : "fx:id=\"p2TextField\" was not injected: check your FXML file 'Principal.fxml'.";
-        assert start_Button != null : "fx:id=\"start_Button\" was not injected: check your FXML file 'Principal.fxml'.";
-
-    }
-
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }
