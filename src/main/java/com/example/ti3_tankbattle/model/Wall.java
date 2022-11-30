@@ -12,6 +12,8 @@ public class Wall {
     private GraphicsContext gc;
     public int x,y;
     private String uri;
+    public double w;
+    public double h;
 
     public Wall(Canvas canvas, int x, int y, String imagePath){
         this.canvas = canvas;
@@ -21,6 +23,8 @@ public class Wall {
         this.y = y;
     }
 
-    public void drawWall(double x, double y, double w, double h){gc.drawImage(new Image(uri),x,y,w,h);}
+    public void drawWall(double x, double y, double w, double h){
+        gc.drawImage(new Image(uri),x,y,w,h);
+    }
 
 }

@@ -25,6 +25,7 @@ public class Avatar {
     private int ammunition = 1000000000;
     public String name;
     public ArrayList<Bullet> bullets;
+    private Vector vector;
 
     public Avatar(Canvas canvas, double posx, double posy, String imagePath, String name) {
         this.canvas = canvas;
@@ -37,6 +38,7 @@ public class Avatar {
         this.y = posy;
         this.name = name;
         bullets = new ArrayList<>();
+        vector = new Vector(posx,posy);
     }
 
     public void draw(){
@@ -54,6 +56,7 @@ public class Avatar {
     public void setPosition(double x, double y){
         pos.x=(int) x -25;
         pos.y=(int) y -25;
+        vector = new Vector(pos.x, pos.y);
     }
     //new
     public void changeAngle(double a){
