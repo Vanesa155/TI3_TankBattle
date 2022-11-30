@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -529,15 +530,14 @@ public class GameController implements Initializable {
     @FXML
     private ImageView Image159;
 
+    @FXML
+    private Label p1_label;
 
     @FXML
-    private Label P1_Label;
+    private Label p2_label;
 
     @FXML
-    private Label P2_Label;
-
-    @FXML
-    private Label cpu_Label;
+    private Label cpu_label;
 
     //Para lo de cambiar los nombres de los labels
     //public static Label static_P1_Label;
@@ -564,9 +564,11 @@ public class GameController implements Initializable {
         draw();
 
         //Para lo de cambiar los nombres de los labels
-        //static_P1_Label = P1_Label;
-        //static_P2_Label = P2_Label;
-        //static_CPU_Label = cpu_Label;
+        /*static_P1_Label = p1_label;
+        static_P2_Label = p2_label;
+        static_CPU_Label = cpu_label;
+
+         */
 
     }
 
