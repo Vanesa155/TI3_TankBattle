@@ -6,6 +6,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Avatar {
@@ -22,6 +24,7 @@ public class Avatar {
 
     private int ammunition = 1000000000;
     public String name;
+    public ArrayList<Bullet> bullets;
 
     public Avatar(Canvas canvas, double posx, double posy, String imagePath, String name) {
         this.canvas = canvas;
@@ -33,6 +36,7 @@ public class Avatar {
         this.x = posx;
         this.y = posy;
         this.name = name;
+        bullets = new ArrayList<>();
     }
 
     public void draw(){
