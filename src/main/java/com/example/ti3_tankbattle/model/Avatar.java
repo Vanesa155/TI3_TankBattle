@@ -22,7 +22,7 @@ public class Avatar {
 
     private int lifePoints = 5;
 
-    private int ammunition = 1000000000;
+    private int ammunition = 10;
     public String name;
     public ArrayList<Bullet> bullets;
     private Vector vector;
@@ -48,6 +48,7 @@ public class Avatar {
         this.name = name;
         bullets = new ArrayList<>();
         vector = new Vector(posx,posy);
+        this.id = id;
     }
 
     public void draw(){

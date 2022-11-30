@@ -39,6 +39,8 @@ public class PuntajesController implements Initializable {
             new PlayerPoints("Osejo", 1),
             new PlayerPoints("Glo", 1),
             new PlayerPoints("Hidalgo", 2)
+
+
     );
 
     @Override

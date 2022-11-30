@@ -344,11 +344,6 @@ public class GameController implements Initializable {
                             }
                             if (players.get(e).getLifePoints() < 1) {
                                 players.remove(e);
-                                Alert alert = new Alert(Alert.AlertType.WARNING);
-                                alert.setTitle("ELIMINATED PLAYER");
-                                alert.setContentText("PLAYER: " + players.get(e).getId() + " ELIMINATED");
-                                alert.setHeaderText("WARNING");
-                                alert.showAndWait();
                             }
                             return;
 
@@ -463,6 +458,7 @@ public class GameController implements Initializable {
                         detectShoot();
                         detectWallCollision();
                         detectBroderCollision();
+                        //comprobarWinner();
 
                         //sleep
                         try {
@@ -475,24 +471,30 @@ public class GameController implements Initializable {
         ).start(); //Se debe poner el start para que lo que esté en draw funcione
     }
 
-    /*void comprobarWinner() {
-        if (players.size() == 1){
-            Application.showWindow("puntajes.fxml");
-            Stage currentStage = (Stage) P1_Label.getScene().getWindow();
+    /*
+    void comprobarWinner() {
+        Stage currentStage = null;
+        if (players.size() == 1) {
+            currentStage = (Stage) P1_Label.getScene().getWindow();
+            if (players.get(0) != null) {
+
+                if (players.get(0).getId().equalsIgnoreCase(PlayerNames.getInstance().getNameP1())) {
+                    PlayerNames.getInstance().setWinnner1(1);
+                }
+                if (players.get(0).getId().equalsIgnoreCase(PlayerNames.getInstance().getNameP2())) {
+                    PlayerNames.getInstance().setWinner2(1);
+                }
+
+            }
+
+            Application.showWindow("Puntajes.fxml");
             currentStage.hide();
+
         }
+
     }
 
      */
-    @FXML
-    private Button endgame_Button;
 
-    @FXML
-    void endGame(ActionEvent event) {
-        if (players.size() == 1) {
-            Application.showWindow("puntajes.fxml");
-            Stage currentStage = (Stage) P1_Label.getScene().getWindow();
-            currentStage.hide();
-        }
-    }
 }
+
