@@ -613,15 +613,18 @@ public class GameController implements Initializable {
         if (keyEvent.getCode() == KeyCode.RIGHT) {Rightpressed = true;}
         if (keyEvent.getCode() == KeyCode.X) {
 
-            for (int i = 0; i < players.size(); i++) {
+            for (Avatar player : players) {
 
-                if (players.get(i).name.equalsIgnoreCase("avatar1")) {
+                if (player.name.equalsIgnoreCase("avatar1")) {
 
-                    if (players.get(i).getAmmunition() < 1) {System.out.println("Reload");}else{
+                    if (player.getAmmunition() < 1) {
+                        System.out.println("Reload");
+                    } else {
 
-                        Bullet bullet = new Bullet(canvas, new Vector(players.get(i).pos.x, players.get(i).pos.y),  new Vector(5*players.get(i).direction.x, 5*players.get(i).direction.y));
-                        players.get(i).bullets.add(bullet);
-                        players.get(i).setAmmunition(players.get(i).getAmmunition()-1);}
+                        Bullet bullet = new Bullet(canvas, new Vector(player.pos.x, player.pos.y), new Vector(5 * player.direction.x, 5 * player.direction.y));
+                        player.bullets.add(bullet);
+                        player.setAmmunition(player.getAmmunition() - 1);
+                    }
 
                 }
 
@@ -629,15 +632,18 @@ public class GameController implements Initializable {
         }
         if (keyEvent.getCode() == KeyCode.SPACE) {
 
-            for (int i = 0; i < players.size(); i++) {
+            for (Avatar player : players) {
 
-                if (players.get(i).name.equalsIgnoreCase("avatar2")) {
+                if (player.name.equalsIgnoreCase("avatar2")) {
 
-                    if (players.get(i).getAmmunition() < 1) {System.out.println("Reload");}else{
+                    if (player.getAmmunition() < 1) {
+                        System.out.println("Reload");
+                    } else {
 
-                        Bullet bullet = new Bullet(canvas, new Vector(players.get(i).pos.x, players.get(i).pos.y),  new Vector(5*players.get(i).direction.x, 5*players.get(i).direction.y));
-                        players.get(i).bullets.add(bullet);
-                        players.get(i).setAmmunition(players.get(i).getAmmunition()-1);}
+                        Bullet bullet = new Bullet(canvas, new Vector(player.pos.x, player.pos.y), new Vector(5 * player.direction.x, 5 * player.direction.y));
+                        player.bullets.add(bullet);
+                        player.setAmmunition(player.getAmmunition() - 1);
+                    }
 
                 }
 
@@ -753,11 +759,16 @@ public class GameController implements Initializable {
                         }
                     }
                 }
-
             }
+        }
+    }
+
+    public void detectCollision () {
+
+        for (int i = 0; i < players.size(); i ++) {
+
 
         }
-
 
     }
 
@@ -771,20 +782,20 @@ public class GameController implements Initializable {
                                     gc.setFill(Color.BLACK);
                                     gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                                    for (int i = 0; i < players.size(); i++) {players.get(i).draw();}
+                                    for (Avatar player : players) {player.draw();}
 
                                     drawWalls();
 
-                                    for (int j = 0; j < players.size(); j ++) {
+                                    for (Avatar player : players) {
 
-                                        for (int i = 0; i < players.get(j).bullets.size(); i ++ ) {
+                                        for (int i = 0; i < player.bullets.size(); i++) {
 
-                                            players.get(j).bullets.get(i).draw();
-                                            if(players.get(j).bullets.get(i).pos.x > canvas.getWidth()+20 ||
-                                                    players.get(j).bullets.get(i).pos.y > canvas.getHeight()+20 ||
-                                                    players.get(j).bullets.get(i).pos.y < -20 ||
-                                                    players.get(j).bullets.get(i).pos.x < -20){
-                                                players.get(j).bullets.remove(i);
+                                            player.bullets.get(i).draw();
+                                            if (player.bullets.get(i).pos.x > canvas.getWidth() + 20 ||
+                                                    player.bullets.get(i).pos.y > canvas.getHeight() + 20 ||
+                                                    player.bullets.get(i).pos.y < -20 ||
+                                                    player.bullets.get(i).pos.x < -20) {
+                                                player.bullets.remove(i);
                                             }
 
                                         }
