@@ -50,6 +50,7 @@ public class PrincipalController extends GameController implements Initializable
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
 
