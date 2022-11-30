@@ -29,7 +29,6 @@ public class GameController implements Initializable {
     private Avatar avatar2;
     private Avatar cpu;
     private Wall wall;
-    private ArrayList<Bullet> bullets;
     private ArrayList<Avatar> players;
     private Boolean isRuning = true;
 
@@ -549,20 +548,19 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
-        players = new ArrayList<>();
-
         canvas.setOnKeyPressed(this::inKeyPressed);
         canvas.setOnKeyReleased(this::onKeyReleased);
 
         avatar = new Avatar(canvas, 25 , 250, "tank.png", "avatar1"); // se crea el avatar
         avatar2 = new Avatar(canvas, 150, 175, "tank1.png", "avatar2");
         cpu = new Avatar(canvas, 25, 25, "tank2.png", "cpu");
+
+        wall = new Wall(canvas, 40, 220, "wall.png");
+        players = new ArrayList<>();
         players.add(avatar);
         players.add(avatar2);
         players.add(cpu);
 
-        wall = new Wall(canvas, 40, 220, "wall.png");
-        bullets = new ArrayList<>();
         draw();
 
         //Para lo de cambiar los nombres de los labels
@@ -615,18 +613,35 @@ public class GameController implements Initializable {
         if (keyEvent.getCode() == KeyCode.RIGHT) {Rightpressed = true;}
         if (keyEvent.getCode() == KeyCode.X) {
 
-            if (avatar.getAmmunition() < 1) {System.out.println("Reload");}else{
+            for (int i = 0; i < players.size(); i++) {
 
-                Bullet bullet = new Bullet(canvas, new Vector(avatar.pos.x, avatar.pos.y),  new Vector(5*avatar.direction.x, 5*avatar.direction.y));
-                bullets.add(bullet);
-                avatar.setAmmunition(avatar.getAmmunition()-1);}
+                if (players.get(i).name.equalsIgnoreCase("avatar1")) {
+
+                    if (players.get(i).getAmmunition() < 1) {System.out.println("Reload");}else{
+
+                        Bullet bullet = new Bullet(canvas, new Vector(players.get(i).pos.x, players.get(i).pos.y),  new Vector(5*players.get(i).direction.x, 5*players.get(i).direction.y));
+                        players.get(i).bullets.add(bullet);
+                        players.get(i).setAmmunition(players.get(i).getAmmunition()-1);}
+
+                }
+
+            }
         }
         if (keyEvent.getCode() == KeyCode.SPACE) {
 
-            if (avatar2.getAmmunition() < 1) {System.out.println("Reload");}else{
-                Bullet bullet = new Bullet(canvas, new Vector(avatar2.pos.x, avatar2.pos.y),  new Vector(5*avatar2.direction.x, 5*avatar2.direction.y));
-                bullets.add(bullet);
-                avatar2.setAmmunition(avatar2.getAmmunition()-1);}
+            for (int i = 0; i < players.size(); i++) {
+
+                if (players.get(i).name.equalsIgnoreCase("avatar2")) {
+
+                    if (players.get(i).getAmmunition() < 1) {System.out.println("Reload");}else{
+
+                        Bullet bullet = new Bullet(canvas, new Vector(players.get(i).pos.x, players.get(i).pos.y),  new Vector(5*players.get(i).direction.x, 5*players.get(i).direction.y));
+                        players.get(i).bullets.add(bullet);
+                        players.get(i).setAmmunition(players.get(i).getAmmunition()-1);}
+
+                }
+
+            }
         }
 
     }
@@ -712,33 +727,37 @@ public class GameController implements Initializable {
 
     private void detectShoot () {
 
-        for (int i = 0; i < players.size(); i++) {
-            for (int j = 0; j < bullets.size(); j ++) {
+        for (int j = 0; j < players.size(); j++) {
+            for (int i = 0; i < players.get(j).bullets.size(); i++) {
+                Avatar a = null;
+                Bullet b = players.get(j).bullets.get(i);
+                for (int e = 0; e < players.size(); e++) {
+                    System.out.println(e);
+                    if  (!players.get(e).name.equalsIgnoreCase(players.get(j).name)) {
+                        a = players.get(e);
 
-                Bullet b = bullets.get(j);
-                Avatar a = players.get(i);
+                        double c1 = b.pos.x - a.x;
+                        double c2 = b.pos.y - a.y;
 
-                double c1 = b.pos.x-a.x;
-                double c2 = b.pos.y-a.y;
+                        double distance = Math.sqrt(Math.pow(c1, 2) + Math.pow(c2, 2));
+                        System.out.println("distancia de " + players.get(e).name + " a la bala es: " + distance);
+                        if (distance < 25) {
+                            players.get(j).bullets.remove(i);
+                            players.get(e).setLifePoints(a.getLifePoints() - 1);
+                            if (players.get(e).getLifePoints() < 1) {
+                                players.remove(e);
+                                System.out.println("JUGADOR BORRADO");
+                            }
+                            return;
 
-                double distance = Math.sqrt(Math.pow(c1, 2)+Math.pow(c2,2));
-                //System.out.println("distancia de " + players.get(i).name + " a la bala es: " + distance);
-                if (distance < 25) {
-
-                    bullets.remove(j);
-                    players.get(i).setLifePoints(players.get(i).getLifePoints()-1);
-                    if (players.get(i).getLifePoints() < 1) {
-                        players.remove(i);
-                        System.out.println("JUGADOR BORRADO");
-                        System.out.println("tamano arreglos jugadores: " + players.size());
+                        }
                     }
-                    return;
-
                 }
 
             }
 
         }
+
 
     }
 
@@ -756,22 +775,28 @@ public class GameController implements Initializable {
 
                                     drawWalls();
 
+                                    for (int j = 0; j < players.size(); j ++) {
 
-                                    for (int i = 0; i < bullets.size(); i++) {
-                                        bullets.get(i).draw();
-                                        if(bullets.get(i).pos.x > canvas.getWidth()+20 || bullets.get(i).pos.y > canvas.getHeight()+20 || bullets.get(i).pos.y < -20 || bullets.get(i).pos.x < -20){
-                                            bullets.remove(i);
+                                        for (int i = 0; i < players.get(j).bullets.size(); i ++ ) {
+
+                                            players.get(j).bullets.get(i).draw();
+                                            if(players.get(j).bullets.get(i).pos.x > canvas.getWidth()+20 ||
+                                                    players.get(j).bullets.get(i).pos.y > canvas.getHeight()+20 ||
+                                                    players.get(j).bullets.get(i).pos.y < -20 ||
+                                                    players.get(j).bullets.get(i).pos.x < -20){
+                                                players.get(j).bullets.remove(i);
+                                            }
+
                                         }
 
                                     }
-
-                                    //System.out.println(bullets.size());
 
                                     doKeyBoardAction();
 
                                 });
 
                         // Collision
+
                         detectShoot();
 
                         //sleep
