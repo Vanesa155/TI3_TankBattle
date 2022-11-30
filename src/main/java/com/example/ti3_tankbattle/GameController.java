@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -15,7 +15,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -55,6 +58,49 @@ public class GameController implements Initializable {
 
     @FXML
     private Label cpu_Label;
+    @FXML
+    private Circle P1V1;
+
+    @FXML
+    private Circle P1V2;
+
+    @FXML
+    private Circle P1V3;
+
+    @FXML
+    private Circle P1V4;
+
+    @FXML
+    private Circle P1V5;
+    @FXML
+    private Circle P2V1;
+
+    @FXML
+    private Circle P2V2;
+
+    @FXML
+    private Circle P2V3;
+
+    @FXML
+    private Circle P2V4;
+
+    @FXML
+    private Circle P2V5;
+    @FXML
+    private Circle PCV1;
+
+    @FXML
+    private Circle PCV2;
+
+    @FXML
+    private Circle PCV3;
+
+    @FXML
+    private Circle PCV4;
+
+    @FXML
+    private Circle PCV5;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,9 +116,9 @@ public class GameController implements Initializable {
         P2_Label.setText(PlayerNames.getInstance().getNameP2());
         P1_Label.setText(PlayerNames.getInstance().getNameP1());
 
-        avatar = new Avatar(canvas, 25 , 250, "tank.png", "avatar1"); // se crea el avatar
-        avatar2 = new Avatar(canvas, 150, 175, "tank1.png", "avatar2");
-        cpu = new Avatar(canvas, 25, 25, "tank2.png", "cpu");
+        avatar = new Avatar(canvas, 75 , 250, "tank.png", "avatar1", PlayerNames.getInstance().getNameP1()); // se crea el avatar
+        avatar2 = new Avatar(canvas, 150, 175, "tank1.png", "avatar2", PlayerNames.getInstance().getNameP2());
+        cpu = new Avatar(canvas, 45, 45, "tank2.png", "cpu", "CPU");
         rnd = new Random();
 
         walls = new ArrayList<>();
@@ -142,7 +188,11 @@ public class GameController implements Initializable {
                 if (player.name.equalsIgnoreCase("avatar1")) {
 
                     if (player.getAmmunition() < 1) {
-                        System.out.println("Reload");
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("WARNING");
+                        alert.setContentText("PLAYER " + player.name + " RELOAD")  ;
+                        alert.setHeaderText("WARNING");
+                        alert.showAndWait();
                     } else {
 
                         Bullet bullet = new Bullet(canvas, new Vector(player.pos.x, player.pos.y), new Vector(5 * player.direction.x, 5 * player.direction.y));
@@ -161,7 +211,13 @@ public class GameController implements Initializable {
                 if (player.name.equalsIgnoreCase("avatar2")) {
 
                     if (player.getAmmunition() < 1) {
-                        System.out.println("Reload");
+
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("WARNING");
+                        alert.setContentText("PLAYER " + player.name + " RELOAD")  ;
+                        alert.setHeaderText("WARNING");
+                        alert.showAndWait();
+
                     } else {
 
                         Bullet bullet = new Bullet(canvas, new Vector(player.pos.x, player.pos.y), new Vector(5 * player.direction.x, 5 * player.direction.y));
@@ -232,11 +288,67 @@ public class GameController implements Initializable {
                         double c2 = b.pos.y - a.y;
 
                         double distance = Math.sqrt(Math.pow(c1, 2) + Math.pow(c2, 2));
-                        if (distance < 25) {
+                        if (distance < 35) {
                             players.get(j).bullets.remove(i);
                             players.get(e).setLifePoints(a.getLifePoints() - 1);
+                            if (players.get(e).name.equalsIgnoreCase("avatar1")) {
+                                if (players.get(e).getLifePoints() == 4) {
+                                    P1V1.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 3) {
+                                    P1V2.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 2) {
+                                    P1V3.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 1) {
+                                    P1V4.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 0) {
+                                    P1V5.setFill(Color.BLACK);
+                                }
+                            }
+                            if (players.get(e).name.equalsIgnoreCase("avatar2")) {
+                                if (players.get(e).getLifePoints() == 4) {
+                                    P2V1.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 3) {
+                                    P2V2.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 2) {
+                                    P2V3.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 1) {
+                                    P2V4.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 0) {
+                                    P2V5.setFill(Color.BLACK);
+                                }
+                            }
+                            if (players.get(e).name.equalsIgnoreCase("cpu")) {
+                                if (players.get(e).getLifePoints() == 4) {
+                                    PCV1.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 3) {
+                                    PCV2.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 2) {
+                                    PCV3.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 1) {
+                                    PCV4.setFill(Color.BLACK);
+                                }
+                                if (players.get(e).getLifePoints() == 0) {
+                                    PCV5.setFill(Color.BLACK);
+                                }
+                            }
                             if (players.get(e).getLifePoints() < 1) {
                                 players.remove(e);
+                                Alert alert = new Alert(Alert.AlertType.WARNING);
+                                alert.setTitle("ELIMINATED PLAYER");
+                                alert.setContentText("PLAYER: " + players.get(e).getId() + " ELIMINATED");
+                                alert.setHeaderText("WARNING");
+                                alert.showAndWait();
                             }
                             return;
 

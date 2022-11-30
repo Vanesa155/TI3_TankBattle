@@ -26,8 +26,17 @@ public class Avatar {
     public String name;
     public ArrayList<Bullet> bullets;
     private Vector vector;
+    private String id;
 
-    public Avatar(Canvas canvas, double posx, double posy, String imagePath, String name) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Avatar(Canvas canvas, double posx, double posy, String imagePath, String name, String id) {
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
         String uri = "file:"+ Application.class.getResource(imagePath).getPath();
